@@ -1,7 +1,6 @@
-// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> DECK OF CARDS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
- let deck = {}; // Skapar en variabel för att spara vårat deck i.
+let deck = {}; // Skapar en variabel för att spara vårat deck i.
  async function getDeck() {
+
    // En asynchron funktion som vi anropar från root för att hämta vårat deck så fort vår kod laddas och exekveras
   const res = await fetch(
      "https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1" // Kolla dokumentationen för api:et hur ni kan skicka in variabler, men här väljer vi att vi bara ska ett deck
@@ -25,3 +24,5 @@
    const data = await res.json();
    console.log(data.cards[0]); // Loggar det första kortet i resultatet då jag bara ville dra 1 kort.
  });
+
+ 
