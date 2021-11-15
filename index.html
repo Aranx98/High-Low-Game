@@ -7,14 +7,25 @@
     <title>Card Game</title>
     <link rel="stylesheet" href="style.css" />
     <script src="index.js" defer></script>
-  </head>
-  <body>
+</head>
+<body>
+<div id="getCard" class="flex-column">
+    <button class="button1" id="start">Starta spelet </button>
+    <h2>Välkommen till HiLo. Ett roligt gissningsspel! </h2>
+    <img class="card" src="" alt="">
+    
+    <h2>Gissa om nästa kort är högre eller lägre </h2>
+    <div class="flex-row">
+        
     <button id="drawCard">Dra kort</button>
-    <button id="lower"><< Lägre</button>
-    <button id="higher">Högre >></button>
+    <button class="button" id="higher" >Högre </button>
+    <button class="button" id="lower"> Lägre</button>
     <div id="Card">
-        <h2></h2>
-        <img id="image" src="" alt=""/>
+      <h2></h2>
+      <img id="image" src="" alt=""/>
     </div>
-  </body>
+    <p id="message"></p>
+</div>
+    
+</body>
 </html>
