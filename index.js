@@ -1,4 +1,6 @@
 let deck={}; //skapar en variabel för att spara vårat deck i
+let currentCard = 0;
+let oldCard = 0;
 
 const card = document.getElementById("card");
 const lowerButton = document.getElementById("lower");
@@ -44,11 +46,11 @@ higherButton.addEventListener("click", async() => {
   await higher();
 });
 
-async function lower() {
-  drawnewCard(2);
+async function lower() { //Här kallar vi på ett lägre kort via knappen.
+  drawnewCard();
 }
 
-async function higher() {
+async function higher() { //Här kallar vi på ett högre kort via knappen.
   drawnewCard();
 }
 
