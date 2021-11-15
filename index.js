@@ -1,11 +1,9 @@
 let deck={}; //skapar en variabel för att spara vårat deck i
 
-
 const card = document.getElementById("card");
 const lowerButton = document.getElementById("lower");
 const higherButton = document.getElementById("higher");
 const drawCardButton = document.getElementById("drawCard");
-
 
 async function getDeck(){ 
     const res = await fetch("https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1" );
@@ -47,9 +45,41 @@ higherButton.addEventListener("click", async() => {
 });
 
 async function lower() {
-  drawnewCard();
+  drawnewCard(2);
 }
 
 async function higher() {
   drawnewCard();
+}
+
+async function convertRoyals(card) {
+  switch (card) {
+      case "2":
+      case "3":
+      case "4":
+      case "5":
+      case "6":
+      case "7":
+      case "8":
+      case "9":
+      case "10":
+          return parseInt(card);
+
+      case 'ACE':
+          card = 14
+          break
+      case 'KING':
+          card = 13
+          break
+      case 'QUEEN':
+          card = 12
+          break
+      case 'JACK':
+          card = 11
+          break
+      default:
+          console.log("Somethings Wrong");
+          break;
+  }
+  return card
 }
