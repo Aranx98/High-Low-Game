@@ -1,16 +1,15 @@
 let deck={}; //skapar en variabel för att spara vårat deck i
 
-const smallPokeDex = document.getElementById("smallPokeDex");
-const lowerbutton = document.getElementById("lower");
-const higherbutton = document.getElementById("higher");
+
+const card = document.getElementById("card");
+const lowerButton = document.getElementById("lower");
+const higherButton = document.getElementById("higher");
+const drawCardButton = document.getElementById("drawCard");
 
 
 async function getDeck(){ 
-    const res = await fetch(
-        "https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1"
-    );
+    const res = await fetch("https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1" );
     const data = await res.json(); // Löser ut body från vårat response och gör det till en 
-
     console.log(data);
     deck = data; // assignar data till vårat deck så att vi kan använda variabeln senare
     console.log(deck);
@@ -18,21 +17,39 @@ async function getDeck(){
 
 getDeck(); // Anropar funktionen direkt
 
-const drawCardButt = document.getElementById("drawCard"); // Hämtar våran knapp vi behöver för att dra kort
-
-
-drawCardButt.addEventListener("click", async () => {
-  // Funktionen anropar api:et och får en array av kort plus lite response data
-  const res = await fetch(
-    https://deckofcardsapi.com/api/deck/${deck.deck_id}/draw/?count=1
-  );
+async function drawnewCard() {
+  const res = await fetch(`https://deckofcardsapi.com/api/deck/${deck.deck_id}/draw/?count=1`);
   const data = await res.json();
+  //console.log(data.cards[0]); // Logging the first card
+  image.setAttribute("src", data.cards[0].image);
+  currentCard = data.cards[0].value;
+  console.log(data.cards[0]);
+  currentCard = convertRoyals(currentCard);
+  }
 
-  const displayCard = data.cards[0];
-
-  console.log(data); // Loggar det första kortet i resultatet då jag bara ville dra 1 kort.
-
-  smallPokeDex.children[0].innerText = displayCard.code;
-  smallPokeDex.children[1].setAttribute("src", displayCard.image);
-
+drawCardButton.addEventListener("click", async() => {
+  const res = await fetch(`https://deckofcardsapi.com/api/deck/${deck.deck_id}/draw/?count=1`);
+  const data = await res.json();
+  //console.log(data.cards[0]); // Logging the first card
+  image.setAttribute("src", data.cards[0].image);
+  oldCard = data.cards[0].value;
+  oldCard = convertRoyals(oldCard);
+  console.log(data.cards[0]);
 });
+
+
+lowerButton.addEventListener("click", async() => {
+  await lower();
+});
+
+higherButton.addEventListener("click", async() => {
+  await higher();
+});
+
+async function lower() {
+  drawnewCard();
+}
+
+async function higher() {
+  drawnewCard();
+}

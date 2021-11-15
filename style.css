@@ -1,0 +1,30 @@
+body {
+    font-family: "Roboto", Verdana, sans-serif;
+}
+
+main {
+    max-width: 1000px;
+    margin: auto;
+}
+
+button {
+    background: #8a0000;
+    color: #FFF;
+    border: 0px;
+    padding: 10px 20px;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+.massage {
+    display: none;
+    position: fixed;
+    left: 50%;
+    z-index: 1000;
+    transform: translateX(-50%);
+    background: RGB(255,255,255,0,9);
+    padding: 50px;
+    border: 2px solid black;
+}
