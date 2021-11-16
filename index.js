@@ -39,19 +39,33 @@ drawCardButton.addEventListener("click", async() => {
 
 
 lowerButton.addEventListener("click", async() => {
-  await lower();
+  await drawnewCard();
+  answer("false");
+  console.log("I choose the button lower");
 });
 
 higherButton.addEventListener("click", async() => {
-  await higher();
+  await drawnewCard();
+  answer("true");
+  console.log("I choose the button high");
 });
 
-async function lower() { //Här kallar vi på ett lägre kort via knappen.
-  drawnewCard();
-}
+async function answer(guess) {
+  let correctAnswer = '';
+  let firstCard = oldCard;
+  let secondCard = currentCard;
 
-async function higher() { //Här kallar vi på ett högre kort via knappen.
-  drawnewCard();
+  if(secondCard > firstCard) {
+    correctAnswer ="higher";
+  } else {
+    correctAnswer = "lower";
+  }
+  if(guess == correctAnswer) {
+    console.log("It was right");
+  } else {
+    console.log("It was wrong");
+  }
+
 }
 
 async function convertRoyals(card) {
@@ -65,23 +79,28 @@ async function convertRoyals(card) {
       case "8":
       case "9":
       case "10":
-          return parseInt(card);
 
+      return parseInt(card);
+      
       case 'ACE':
-          card = 14
-          break
+      card = 14
+
+      break
       case 'KING':
-          card = 13
-          break
+      card = 13
+
+      break
       case 'QUEEN':
-          card = 12
-          break
+      card = 12
+
+      break
       case 'JACK':
-          card = 11
-          break
+      card = 11
+
+      break
       default:
-          console.log("Somethings Wrong");
-          break;
+      console.log("Somethings Wrong");
+      break;
   }
   return card
 }
