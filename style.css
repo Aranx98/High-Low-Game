@@ -4,7 +4,7 @@ body {
 }
 
 main {
-    max-width: 1000px;
+    max-width: 200px;
     margin: auto;
 }
 
@@ -28,4 +28,10 @@ button:hover {
     background: RGB(255,255,255,0,9);
     padding: 50px;
     border: 2px solid black;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+
 }
