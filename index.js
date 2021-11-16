@@ -9,10 +9,9 @@ const higherButton = document.getElementById("higher");
 const drawCardButton = document.getElementById("drawCard");
 
 
-
 async function getDeck(){ 
     const res = await fetch("https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1" );
-    const data = await res.json(); // Löser ut body från vårat response och gör det till en 
+    const data = await res.json(); 
     
     deck = data; // assignar data till vårat deck så att vi kan använda variabeln senare
     
@@ -25,8 +24,7 @@ async function drawFirstCard() {
   const data = await res.json();
   
   image.setAttribute("src", data.cards[0].image);
-  currentCard = data.cards[0].value;
-  currentCard = convertRoyals(currentCard);
+  oldCard = convertRoyals(data.cards[0].value);
 
   return oldCard;
 
@@ -45,15 +43,10 @@ async function drawnewCard() {
 }
 
 drawCardButton.addEventListener("click", async() => {
-  const res = await fetch(`https://deckofcardsapi.com/api/deck/${deck.deck_id}/draw/?count=1`);
-  const data = await res.json();
   const firstCard = await drawFirstCard();
-
-  console.log(data.cards[0]);
   ArraywithCards.push(firstCard);
 
 });
-
 
 lowerButton.addEventListener("click", async() => {
   await lower();
@@ -69,20 +62,32 @@ async function lower() {
   const currentCard = await drawnewCard();
   ArraywithCards.push(currentCard); 
 
-  if(ArraywithCards[0] < ArraywithCards[1]) { //Jämför det första kortet med det andra.
+  if(ArraywithCards[0] > ArraywithCards[1]) { //Jämför det första kortet med det andra.
     console.log("Du svarade rätt, kortet var lägre.");
 
-  } else { 
-    console.log("Du svarade fel, kortet var högre.")
+  } else {
+
+    console.log("Du svarade fel, kortet var högre.");
   }
    ArraywithCards.shift();
- 
+}
 
-  
+async function higher() {
+  const currentCard = await drawnewCard();
+  ArraywithCards.push(currentCard); 
+
+  if(ArraywithCards[0] < ArraywithCards[1]) { //Jämför det första kortet med det andra.
+    console.log("Du svarade rätt, kortet var högre.");
+
+  } else {
+
+    console.log("Du svarade fel, kortet var lägre.");
+  }
+   ArraywithCards.shift();
 
 }
 
-async function convertRoyals(card) {
+function convertRoyals(card) {
   switch (card) {
       case "2":
       case "3":
@@ -93,28 +98,23 @@ async function convertRoyals(card) {
       case "8":
       case "9":
       case "10":
-
-      return parseInt(card);
-      
+          card = parseInt(card);
+          break
       case 'ACE':
-      card = 14
-
-      break
+          card = 14
+          break
       case 'KING':
-      card = 13
-
-      break
+          card = 13
+          break
       case 'QUEEN':
-      card = 12
-
-      break
+          card = 12
+          break
       case 'JACK':
-      card = 11
-
-      break
+          card = 11
+          break
       default:
-      console.log("Somethings Wrong");
-      break;
+          console.log("Somethings Wrong");
+          break;
   }
   return card
 }
